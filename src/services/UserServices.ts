@@ -25,7 +25,14 @@ export const register = async ({
     password: hashedPassword,
   });
   await newUser.save();
-  return { data: generateJWT({firstName:newUser.firstName, lastName:newUser.lastName, email}), statusCode: 200 };
+  return {
+    data: generateJWT({
+      firstName: newUser.firstName,
+      lastName: newUser.lastName,
+      email,
+    }),
+    statusCode: 200,
+  };
 };
 
 interface loginparams {
