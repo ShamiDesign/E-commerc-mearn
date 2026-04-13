@@ -5,12 +5,12 @@ export const getAllProducts = async () => {
 };
 
 export const seedInProducts = async () => {
-  const testProducts = [
-    { title: "lap top", image: "image1.jpg", price: 200, stock: 2 },
+  const products = [
+    { title: "lap top", image: "image1.jpg", price: 200, stock: 290 },
   ];
 
   const existingProduct = await getAllProducts();
   if (existingProduct.length === 0) {
-    await productModel.insertMany(testProducts);
+    await productModel.insertMany(products);
   }
 };

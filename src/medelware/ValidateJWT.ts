@@ -1,11 +1,10 @@
-import type { Request, Response, NextFunction } from "express";
+import type {Response, NextFunction } from "express";
+import type { ExtendRequest } from "../Types/extandedRequest.ts";
 import jwt from "jsonwebtoken";
-import { cartModel } from "../models/CartModel.ts"
+
 import { userModel } from "../models/UserModel.ts";
 
-interface ExtendRequest extends Request {
-  user?: any;
-}
+ 
 const ValidateJWT = async (
   req: ExtendRequest,
   res: Response,
@@ -43,7 +42,7 @@ const ValidateJWT = async (
     if (!user) {
       return res.status(401).send("User not found");
     }
-    req.user = user;
+    req.user= user;
     next();
   });
 };

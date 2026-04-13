@@ -16,8 +16,8 @@ mongoose
 
 seedInProducts();
 
-app.use("/User", router);
-app.use("/Product", productRouter);
-app.use("/Cart", CartRouter);
+app.use("/user", router);
+app.use("/product", productRouter);
+app.use("/cart", CartRouter);
 
 app.listen(port, () => console.log(`Server is running to port : ${port} `));
