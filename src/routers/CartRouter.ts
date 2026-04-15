@@ -1,6 +1,12 @@
 import express from "express";
 import type { Response } from "express";
-import { addItemToCart, getCartForUser } from "../services/CartSevices.ts";
+import {
+  addItemToCart,
+  getCartForUser,
+  clearCart,
+  updateItemInCart,
+  deleteItemFromCart,
+} from "../services/CartSevices.ts";
 import ValidateJWT from "../medelware/ValidateJWT.ts";
 import type { ExtendRequest } from "../Types/extandedRequest.ts";
 
@@ -13,6 +19,13 @@ router.get("/", ValidateJWT, async (req: ExtendRequest, res) => {
 
   console.log("CART:", cart);
   res.status(200).send(cart);
+});
+
+// Clear Cart
+router.delete("/", ValidateJWT, async (req: ExtendRequest, res) => {
+  const userId = req?.user?._id;
+  const response = await clearCart({ userId });
+  res.status(response.statusCode).send(response.data);
 });
 
 // Add items to cart
@@ -28,5 +41,25 @@ router.post("/items", ValidateJWT, async (req: ExtendRequest, res) => {
     res.status(500).send("Something went wrong!");
   }
 });
+
+// Update item To cart
+router.put("/items", ValidateJWT, async (req: ExtendRequest, res) => {
+  const userId = req?.user?._id;
+  const { productId, quntatity } = req.body;
+  const response = await updateItemInCart({ productId, userId, quntatity });
+  res.status(response.statusCode).send(response.data);
+});
+
+//  Delete item from Cart
+router.delete(
+  "/items/:productId",
+  ValidateJWT,
+  async (req: ExtendRequest, res) => {
+    const userId = req?.user?._id;
+    const { productId } = req.params;
+    const response = await deleteItemFromCart({ userId, productId });
+    res.status(response.statusCode).send(response.data);
+  },
+);
 
 export default router;
