@@ -1,4 +1,4 @@
-import dotenv from "dotenv"
+import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
 import { router } from "./routers/UserRout.ts";
@@ -7,11 +7,11 @@ import { productRouter } from "./routers/ProductRouter.ts";
 import CartRouter from "./routers/CartRouter.ts";
 const app = express();
 const port = 3001;
-dotenv.config()
+dotenv.config();
 app.use(express.json());
 
 mongoose
-  .connect( process.env.URL_KEY|| "")
+  .connect(process.env.URL_KEY || "")
   .then(() => console.log("Connected Mongoose"))
   .catch((error) => console.log("Faild Connected to Mongoose", error));
 

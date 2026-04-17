@@ -3,7 +3,7 @@ import type { IProduct } from "./ProductModel.ts";
 
 const EnumStatus = ["Active", "Completed"];
 
-export interface ICartItem  {
+export interface ICartItem {
   product: IProduct;
   unitPrice: number;
   quntatity: number;
@@ -22,11 +22,10 @@ export const cartItemSchema = new Schema<ICartItem>({
   unitPrice: { type: Number, required: true },
 });
 
-
 export const CartSchema = new Schema<ICart>({
   userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
   item: [cartItemSchema],
- totalAmount: { type: Number, required: true},
+  totalAmount: { type: Number, required: true },
   status: { type: String, enum: EnumStatus, default: "Active" },
 });
 
