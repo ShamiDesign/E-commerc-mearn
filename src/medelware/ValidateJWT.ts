@@ -20,7 +20,7 @@ const ValidateJWT = async (
     res.status(403).send("Bearat token is not invaid");
     return;
   }
-  jwt.verify(token, "kilTnpBmhIge_bPExlCa", async (err, payload) => {
+  jwt.verify(token, process.env.JWT_SECRIT || " ", async (err, payload) => {
     if (err) {
       res.status(403).send("Token is not invalid");
       return;

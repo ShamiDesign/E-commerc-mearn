@@ -1,25 +1,31 @@
 import express from "express";
-import {login, register}  from "../services/UserServices.ts";
+import { login, register } from "../services/UserServices.ts";
 
 export const router = express.Router();
 
-
-
+// Registering
 router.post("/register", async (req, res) => {
-  const { firstName, lastName, email, password } = req.body;
-  const { data, statusCode } = await register({
-    firstName,
-    lastName,
-    email,
-    password,
-  });
-  res.status(statusCode).send(data);
+  try {
+    const { firstName, lastName, email, password } = req.body;
+    const { data, statusCode } = await register({
+      firstName,
+      lastName,
+      email,
+      password,
+    });
+    res.status(statusCode).send(data);
+  } catch (error) {
+    res.status(500).send("Somethig went wrong!");
+  }
 });
 
-router.post("/login", async (req , res)=>{
-    const {email, password}= req.body
-    const {data, statusCode}= await login({email,password})
-    res.status(statusCode).send(data)
-})
-
-
+// Login
+router.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const { data, statusCode } = await login({ email, password });
+    res.status(statusCode).send(data);
+  } catch (error) {
+    res.status(500).send("Somethig went wrong!");
+  }
+});

@@ -1,9 +1,10 @@
 import { cartModel, type ICart } from "../models/CartModel.ts";
+import { orderModel, type IOederItem } from "../models/OrderModel.ts";
 import { productModel } from "../models/ProductModel.ts";
 
 // Create Cart For User
-interface CreateCartForUser{
-  userId:string
+interface CreateCartForUser {
+  userId: string;
 }
 export const createCartForUser = async ({ userId }: CreateCartForUser) => {
   const cart = await cartModel.create({ userId, totalAmount: 0 });
@@ -128,18 +129,43 @@ export const deleteItemFromCart = async ({
   }, 0);
   cart.item = otherItemInCart;
   cart.totalAmount = total;
-  const updateCart = await cart.save()
-      return { data: updateCart, statusCode: 200 };
-
+  const updateCart = await cart.save();
+  return { data: updateCart, statusCode: 200 };
 };
 
-// const calculateCartTolalItem=({cart, productId}:{cart:ICart, productId: string })=>{
-//   const OtherItemInCart = cart.item.filter(
-//     (p) => p.product.toString() !== productId,
-//   );
-//   const total = OtherItemInCart.reduce((sum, product) => {
-//     sum += product.quntatity * product.unitPrice;
-//     return sum;
-//   }, 0);
-
-// }
+// CheckOut
+interface Checkout {
+  userId: string;
+  addres: string;
+}
+export const checkout = async ({ userId, addres }: Checkout) => {
+  if (!addres) {
+    return { data: "Prease Add your Addres ", statusCode: 400 };
+  }
+  const cart = await getCartForUser({ userId });
+  const orderItems: IOederItem[] = [];
+  // Loop
+  for (const item of cart.item) {
+    const product = await productModel.findById(item.product);
+    if (!product) {
+      return { data: "Product not found", statusCode: 400 };
+    }
+    const orderItem: IOederItem = {
+      productTitle: product.title,
+      productImage: product.image,
+      quantity: item.quntatity,
+      unitPrice: item.unitPrice,
+    };
+    orderItems.push(orderItem);
+  }
+  const order = await orderModel.create({
+    orderItem: orderItems,
+    addres,
+    userId,
+    total: cart.totalAmount,
+  });
+  await order.save();
+  cart.status = "Completed";
+  await cart.save();
+  return { data: order, statusCode: 200 };
+};
