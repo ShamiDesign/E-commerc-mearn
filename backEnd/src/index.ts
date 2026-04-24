@@ -5,10 +5,15 @@ import { router } from "./routers/UserRout.ts";
 import { seedInProducts } from "./services/ProductServices.ts";
 import { productRouter } from "./routers/ProductRouter.ts";
 import CartRouter from "./routers/CartRouter.ts";
+import cors from "cors"
+
+
 const app = express();
 const port = 3001;
 dotenv.config();
 app.use(express.json());
+app.use(cors())
+
 
 mongoose
   .connect(process.env.URL_KEY || "")
