@@ -10,31 +10,28 @@ const RegisterPage = () => {
   const [error, setError] = useState("");
 const usenavigat=useNavigate()
   // 1
-  const firtsNameRef = useRef<HTMLInputElement>(null);
-  const lastNameRef = useRef<HTMLInputElement>(null);
+ 
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
   // 2 Handling Submit
   const onSubmit = async () => {
-    const firstName = firtsNameRef.current?.value;
-    const lastName = lastNameRef.current?.value;
+    
     const email = emailRef.current?.value;
     const password = passwordRef.current?.value;
 
-    if (!firstName || !lastName || !email || !password) {
+    if (!email || !password) {
       setError("Check submited data");
       return;
     }
     // call Api to create user
-    const res = await fetch(`${BASC_URL}/user/register`, {
+    const res = await fetch(`${BASC_URL}/user/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        firstName,
-        lastName,
+       
         email,
         password,
       }),
@@ -59,23 +56,10 @@ const usenavigat=useNavigate()
       <h1 className="text-[40px] font-semibold mb-2">RegisterPage</h1>
       <div className="form flex flex-col gap-5 border border-gray-300 rounded shadow w-[500px] px-6 py-8 mb-10">
         <div className="flex flex-col gap-5">
+        
           <TextField
             id="outlined-basic"
-            label="First Name"
-            name="firstName"
-            variant="outlined"
-            inputRef={firtsNameRef}
-          />
-          <TextField
-            id="outlined-basic"
-            label="Last Name"
-            name="lastName"
-            variant="outlined"
-            inputRef={lastNameRef}
-          />
-          <TextField
-            id="outlined-basic"
-            label="email"
+            label="user Name"
             name="email"
             variant="outlined"
             inputRef={emailRef}
@@ -91,7 +75,7 @@ const usenavigat=useNavigate()
         </div>
         <div className="w-full ">
           <Button onClick={onSubmit} variant="contained" className="w-full">
-            Submit
+            Login
           </Button>
         </div>
         {error && (
