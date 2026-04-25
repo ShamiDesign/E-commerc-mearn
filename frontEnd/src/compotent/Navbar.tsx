@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 const pages = ["Home"];
 
 function Navbar() {
-  const { username, isAuthenticated } = useAuth();
+  const { username, isAuthenticated ,logout} = useAuth();
   const usenavigat = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null,
@@ -46,6 +46,7 @@ function Navbar() {
   };
 
   const handelLogout = () => {
+    logout()
     usenavigat("/");
   };
   console.log("From navbar", { username });

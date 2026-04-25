@@ -8,15 +8,14 @@ import { useNavigate } from "react-router-dom";
 const RegisterPage = () => {
   const { login } = useAuth();
   const [error, setError] = useState("");
-const usenavigat=useNavigate()
+  const usenavigat = useNavigate();
   // 1
- 
+
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
   // 2 Handling Submit
   const onSubmit = async () => {
-    
     const email = emailRef.current?.value;
     const password = passwordRef.current?.value;
 
@@ -31,7 +30,6 @@ const usenavigat=useNavigate()
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-       
         email,
         password,
       }),
@@ -47,7 +45,7 @@ const usenavigat=useNavigate()
     }
 
     login(email, token);
-    usenavigat("/")
+    usenavigat("/");
     console.log(token);
   };
 
@@ -56,7 +54,6 @@ const usenavigat=useNavigate()
       <h1 className="text-[40px] font-semibold mb-2">RegisterPage</h1>
       <div className="form flex flex-col gap-5 border border-gray-300 rounded shadow w-[500px] px-6 py-8 mb-10">
         <div className="flex flex-col gap-5">
-        
           <TextField
             id="outlined-basic"
             label="user Name"
