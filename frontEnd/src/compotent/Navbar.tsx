@@ -3,6 +3,10 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
+import Badge from "@mui/material/Badge";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { styled } from "@mui/material/styles";
+
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import Container from "@mui/material/Container";
@@ -15,10 +19,10 @@ import { useAuth } from "../context/auth/AuthContext";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
 
-const pages = ["Home"];
+const pages = ["Home", "About", "Tools"];
 
 function Navbar() {
-  const { username, isAuthenticated ,logout} = useAuth();
+  const { username, isAuthenticated, logout } = useAuth();
   const usenavigat = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null,
@@ -35,7 +39,8 @@ function Navbar() {
   };
 
   const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
+    // setAnchorElNav(null);
+    usenavigat("/");
   };
 
   const handleCloseUserMenu = () => {
@@ -46,9 +51,23 @@ function Navbar() {
   };
 
   const handelLogout = () => {
-    logout()
+    logout();
     usenavigat("/");
   };
+
+const handelCart=()=>{
+  usenavigat("/CartPage")
+}
+
+  const StyledBadge = styled(Badge)(({ theme }) => ({
+    "& .MuiBadge-badge": {
+      right: -3,
+      top: 13,
+      border: `2px solid ${theme.palette.background.paper}`,
+      padding: "0 4px",
+    },
+  }));
+
   console.log("From navbar", { username });
 
   return (
@@ -138,7 +157,21 @@ function Navbar() {
               </Button>
             ))}
           </Box>
-          <Box sx={{ flexGrow: 0 }}>
+          <Box
+            sx={{
+              flexGrow: 0,
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              gap: 3,
+            }}
+          >
+            <IconButton aria-label="cart" onClick={handelCart}>
+              <StyledBadge badgeContent={4} color="secondary">
+                <ShoppingCartIcon sx={{ color: "white" }} />
+              </StyledBadge>
+            </IconButton>
+
             {isAuthenticated ? (
               <>
                 <Tooltip title="Open settings">
