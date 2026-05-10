@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AuthProvider from "./context/auth/AuthProvider";
+import CartProvider from "./context/cart/CartProvider";
 import HomePage from "./pages/Home";
 import Navbar from "./compotent/Navbar";
 import RegisterPage from "./pages/RegisterPage";
@@ -12,17 +13,19 @@ const App = () => {
   return (
     <>
       <AuthProvider>
-        <BrowserRouter>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/login" element={<Login />} />
-            <Route element={<ProtectedRout />} >
-              <Route path="/CartPage" element={<CartPage />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
+        <CartProvider>
+          <BrowserRouter>
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/login" element={<Login />} />
+              <Route element={<ProtectedRout />}>
+                <Route path="/CartPage" element={<CartPage />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </CartProvider>
       </AuthProvider>
     </>
   );

@@ -1,15 +1,15 @@
 import { createContext, useContext } from "react";
+import type { cartItem } from "../../types/Cart";
 
-interface createContextType {
-  productId: string;
-  title: string;
-  unitPrice: number;
-  quantaty: number;
+interface cartContextType {
+  cartItems: cartItem[];
+  totalAmount: number;
+  AddItemToCart: (productId: string) => void;
 }
-export const CartContext = createContext<createContextType>({
-  productId: null,
-  title: null,
-  unitPrice: null,
-  quantaty: 1,
+
+export const CartContext = createContext<cartContextType>({
+  cartItems: [],
+  totalAmount: 0,
+  AddItemToCart: () => {},
 });
-export const useCart = () => useContext(CartContext);
+export const UseCart = () => useContext(CartContext);
