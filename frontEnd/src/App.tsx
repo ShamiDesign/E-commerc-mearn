@@ -6,6 +6,7 @@ import Navbar from "./compotent/Navbar";
 import RegisterPage from "./pages/RegisterPage";
 import Login from "./pages/Login";
 import CartPage from "./pages/CartPage";
+import  Checkout  from "./pages/Checkout";
 import ProtectedRout from "./compotent/ProtectedRout";
 import "./App.css";
 
@@ -22,6 +23,7 @@ const App = () => {
               <Route path="/login" element={<Login />} />
               <Route element={<ProtectedRout />}>
                 <Route path="/CartPage" element={<CartPage />} />
+                <Route path="/Checkout" element={<Checkout />} />
               </Route>
             </Routes>
           </BrowserRouter>

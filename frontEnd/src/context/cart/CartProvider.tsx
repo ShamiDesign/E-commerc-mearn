@@ -42,12 +42,14 @@ const cartItemMaped =cart.item.map(({
       }));
 
       setcartItems(cartItemMaped);
+      setTotalAmount(cart.totalAmount);
     };
 
     fetchCart();
   }, []);
  
 
+  // Add Item To Cart =====================
   const AddItemToCart = async (productId: string) => {
     try {
       const res = await fetch(`${BASC_URL}/cart/items`, {
@@ -141,6 +143,8 @@ const cartItemMaped =cart.item.map(({
       console.error("Fetch Error:", error);
     }
   };
+
+  // Remove Item From Cart =====================
  const removeItemFromCart = async (productId: string) => {
  try {
       const res = await fetch(`${BASC_URL}/cart/items/${productId}`, {
@@ -183,6 +187,7 @@ const cartItemMaped =cart.item.map(({
     }
 }
 
+//  Cleaar Cart =====================
 const clearCart = async () => {
    try {
       const res = await fetch(`${BASC_URL}/cart`, {

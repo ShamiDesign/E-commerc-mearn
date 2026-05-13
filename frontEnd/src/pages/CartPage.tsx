@@ -23,6 +23,9 @@ const handelRemoveFromCart = (productId: string) => {
  const handelClearCart = () => {
   clearCart();
  }
+  const handelCheckout = () => {
+    
+  }
 const handlerCart= () => {
   return(<>
   <div className=" flex flex-col md:flex-row gap-6 justify-between items-center">
@@ -76,6 +79,7 @@ const handlerCart= () => {
             <h3 className="flex justify-between w-full px-6  pb-4 text-red-600 font-bold">
               <span> Total Price :</span> <span>{totalAmount}</span>
             </h3>
+              <Button variant="contained" color="success" size="large" fullWidth href="/Checkout" onClick={handelCheckout}>Checkout</Button>
           </div>
         </div></>)
 }
