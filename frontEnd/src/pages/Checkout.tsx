@@ -85,10 +85,10 @@ const handlerCart= () => {
     <div className="flex gap-8 w-full p-10 shadow border border-gray-100 rounded items-center justify-center mt-10">
         <h1 className="text-2xl font-semibold">Shipping addres</h1>
       <TextField inputRef={addresRef} id="outlined-basic" label="Add Your addres" variant="outlined" className="w-[400px]"/>
-       <Button variant="contained" color="success" size="large" fullWidth 
-               onClick={handleConfermOrder}>Pay Now</Button>
     </div>
     {cartItems.length > 0 ? handlerCart() : <h1 className="text-3xl font-semibold text-center mt-10 text-red-600">Your Cart Is Empty</h1>}
+       <Button variant="contained" color="success" size="large" fullWidth 
+               onClick={handleConfermOrder}>Pay Now</Button>
     </section>
   )
 }
