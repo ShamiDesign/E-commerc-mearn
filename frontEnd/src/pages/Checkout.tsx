@@ -1,19 +1,37 @@
 import { useRef } from "react";
-
-import TextField from "@mui/material/TextField";
-
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/auth/AuthContext";
 import { UseCart } from "../context/cart/CartContext";
-
+import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { BASC_URL } from "../constants/BascURL";
 
 
 
  const Checkout = () => {
 
+const {token}=useAuth();
+const navigate = useNavigate();
   const { cartItems, totalAmount } = UseCart();
+ const addresRef = useRef<HTMLInputElement>(null);
+ 
+const handleConfermOrder = async () => {
+  const addres = addresRef.current?.value;
+  if (!addres) return;
+const res = await fetch(`${BASC_URL}/cart/checkout`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+       addres,
+      }),
+    });
+    if(!res.ok) return
+   navigate("/SuccessOrder")
 
- const addressRef = useRef<HTMLInputElement>(null);
-
+}
 
 const handlerCart= () => {
   return(<>
@@ -53,7 +71,7 @@ const handlerCart= () => {
             <h3 className="flex justify-between w-full px-6  pb-4 text-red-600 font-bold">
               <span> Total Price :</span> <span>{totalAmount}</span>
             </h3>
-              <Button variant="contained" color="success" size="large" fullWidth href="/Checkout" >Pay Now</Button>
+             
           </div>
         </div></>)
 }
@@ -65,8 +83,10 @@ const handlerCart= () => {
         <h1 className="text-4xl text-red-600 font-semibold">Checkout</h1>
     </div>
     <div className="flex gap-8 w-full p-10 shadow border border-gray-100 rounded items-center justify-center mt-10">
-        <h1 className="text-2xl font-semibold">Shipping Address</h1>
-      <TextField inputRef={addressRef} id="outlined-basic" label="Add Your Address" variant="outlined" className="w-[400px]"/>
+        <h1 className="text-2xl font-semibold">Shipping addres</h1>
+      <TextField inputRef={addresRef} id="outlined-basic" label="Add Your addres" variant="outlined" className="w-[400px]"/>
+       <Button variant="contained" color="success" size="large" fullWidth 
+               onClick={handleConfermOrder}>Pay Now</Button>
     </div>
     {cartItems.length > 0 ? handlerCart() : <h1 className="text-3xl font-semibold text-center mt-10 text-red-600">Your Cart Is Empty</h1>}
     </section>
