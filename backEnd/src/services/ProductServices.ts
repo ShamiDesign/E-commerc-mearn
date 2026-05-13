@@ -10,7 +10,7 @@ export const seedInProducts = async () => {
       title: "Asus",
       image:
         "https://dlcdnwebimgs.asus.com/gain/ca2bb04e-5d42-458d-a309-93c90275db9c/w800",
-      price: 40000,
+      price: 44000,
       stock: 20,
     },
     {
@@ -30,9 +30,30 @@ export const seedInProducts = async () => {
     {
       title: "HP",
       image:
-        "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQdE_2eGQqcFv4w8ssuOJkouB583Cl8V41jObwgxBl11-w32_hwoRv8K2OnvguUVoTnh-zQRa3NXf4R3HW7kjvJNr1fsbJKFNX5-qqRWzs6bRBzODskmGHicp4UX_aE0Y_AfEU0RQ&usqp=CAc",
+        "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/dell-plus/db16255/media-gallery/non-touch/laptop-dell-plus-db16255nt-ice-bl-fpr-gallery-5.psd?fmt=png-alpha&pscan=auto&scl=1&hei=804&wid=979&qlt=100,1&resMode=sharp2&size=979,804&chrss=full",
       price: 20000,
       stock: 2,
+    },
+    {
+      title: "MGC",
+      image:
+        "https://www.digitaltrends.com/uploads/2024/07/surface-laptop-7-06-e1746774119939.jpg",
+      price: 34000,
+      stock: 5,
+    },
+    {
+      title: "Xfhrhd",
+      image:
+        "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQdE_2eGQqcFv4w8ssuOJkouB583Cl8V41jObwgxBl11-w32_hwoRv8K2OnvguUVoTnh-zQRa3NXf4R3HW7kjvJNr1fsbJKFNX5-qqRWzs6bRBzODskmGHicp4UX_aE0Y_AfEU0RQ&usqp=CAc",
+      price: 26000,
+      stock: 2,
+    },
+    {
+      title: "ZenBook",
+      image:
+        "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQ7SgHd-bUzDpuG37SfM05dFEhQbB6ziAvxZkThcn6-4OPMcQg0i2dtyNR4dp3LB5SiFOOdidl3Wggheg5PRXR4DVHq2EnIeKJ5S0_dAsntoO1xUXNGXfHDESZfEJ7SitojK2YMNIY&usqp=CAc",
+      price: 35000,
+      stock: 7,
     },
   ];
 

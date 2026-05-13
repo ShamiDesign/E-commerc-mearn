@@ -18,12 +18,14 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { useAuth } from "../context/auth/AuthContext";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
+import { UseCart } from "../context/cart/CartContext";
 
 const pages = ["Home", "About", "Tools"];
 
 function Navbar() {
   const { username, isAuthenticated, logout } = useAuth();
   const usenavigat = useNavigate();
+  const {cartItems}=UseCart()
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null,
   );
@@ -172,7 +174,7 @@ function Navbar() {
             }}
           >
             <IconButton aria-label="cart" onClick={handelCart}>
-              <StyledBadge badgeContent={4} color="secondary">
+              <StyledBadge badgeContent={cartItems.length} color="secondary">
                 <ShoppingCartIcon sx={{ color: "white" }} />
               </StyledBadge>
             </IconButton>

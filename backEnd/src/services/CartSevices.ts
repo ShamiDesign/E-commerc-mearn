@@ -42,8 +42,8 @@ interface ClearCart {
 export const clearCart = async ({ userId }: ClearCart) => {
   const cart = await getCartForUser({ userId });
   cart.item = [];
-  const updateCart = await cart.save();
-  return { data: updateCart, statusCode: 200 };
+   await cart.save();
+  return { data: await getCartForUser({ userId, populateProduct: true }), statusCode: 200 };
 };
 
 // Add item to cart
